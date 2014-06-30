@@ -29,6 +29,11 @@
             <artifactId>joda-time</artifactId>
             <version>2.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.sitebricks</groupId>
+            <artifactId>slf4j</artifactId>
+            <version>0.8.3</version>
+        </dependency>
     </dependencies>
 
 

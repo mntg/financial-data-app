@@ -9,25 +9,11 @@ public class StockQuote {
     private String symbol;
     private DateTime time;
 
-    public StockQuote(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public StockQuote(String symbol, double bid, double ask) {
+    public StockQuote(String symbol, double bid, double ask, DateTime time) {
         this.symbol = symbol;
         this.bid = bid;
         this.ask = ask;
-        time = new DateTime();
-    }
-
-    public void setBidAsk(double bid, double ask) {
-        this.bid = bid;
-        this.ask = ask;
-        time = new DateTime();
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+        this.time = time;
     }
 
     public double getBid() {
@@ -47,16 +33,30 @@ public class StockQuote {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if(!(other instanceof StockQuote)) {
-            return false;
-        } else {
-            return ((StockQuote) other).getSymbol().equals(symbol) && ((StockQuote) other).getTime().equals(time);
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StockQuote that = (StockQuote) o;
+
+        if (Double.compare(that.ask, ask) != 0) return false;
+        if (Double.compare(that.bid, bid) != 0) return false;
+        if (!symbol.equals(that.symbol)) return false;
+        if (!time.equals(that.time)) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return symbol.hashCode() + time.hashCode();
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(bid);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(ask);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + symbol.hashCode();
+        result = 31 * result + time.hashCode();
+        return result;
     }
 }

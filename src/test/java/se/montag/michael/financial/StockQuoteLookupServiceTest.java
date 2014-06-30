@@ -9,7 +9,7 @@ public class StockQuoteLookupServiceTest {
 
     @Test
     public void testStockQuoteLookup() {
-        System.out.println(StockQuoteLookupService.getQuote("GOOG").getBid());
+        System.out.println(new YahooStockQuoteLookupService().getQuote("GOOG").getBid());
         assert(1 == 1);
     }
 }
